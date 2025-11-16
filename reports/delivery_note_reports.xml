@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Report Action for Испратница/Приемница -->
-    <record id="action_report_delivery_note_mk" model="ir.actions.report">
-        <field name="name">Испратница/Приемница</field>
+    <!-- Report Action for Испратница (Outgoing) -->
+    <record id="action_report_delivery_note_mk_outgoing" model="ir.actions.report">
+        <field name="name">Испратница</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
@@ -11,11 +11,75 @@
         <field name="print_report_name">'Испратница_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
     </record>
 
-    <!-- Report Action for Испратница/Приемница со Цени -->
-    <record id="action_report_delivery_note_mk_with_prices" model="ir.actions.report">
-        <field name="name">Испратница/Приемница со Цени</field>
+    <!-- Data to set domain for outgoing report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_delivery_note_mk_outgoing')]"/>
+        <value eval="{'domain': [('picking_type_id.code', '=', 'outgoing')]}"/>
+    </function>
+
+    <!-- Report Action for Приемница (Incoming) -->
+    <record id="action_report_delivery_note_mk_incoming" model="ir.actions.report">
+        <field name="name">Приемница</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="print_report_name">'Приемница_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for incoming report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_delivery_note_mk_incoming')]"/>
+        <value eval="{'domain': [('picking_type_id.code', '=', 'incoming')]}"/>
+    </function>
+
+    <!-- Report Action for Реверс -->
+    <record id="action_report_reverse_mk" model="ir.actions.report">
+        <field name="name">Реверс</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="print_report_name">'Реверс_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for reverse report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_reverse_mk')]"/>
+        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Реверс'), ('picking_type_id.name', 'not ilike', 'Враќање')]}"/>
+    </function>
+
+    <!-- Report Action for Повратница -->
+    <record id="action_report_return_mk" model="ir.actions.report">
+        <field name="name">Повратница</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="print_report_name">'Повратница_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for return report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_return_mk')]"/>
+        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Враќање')]}"/>
+    </function>
+
+    <!-- Report Action for Испратница со Цени (Outgoing with Prices) -->
+    <record id="action_report_delivery_note_mk_with_prices_outgoing" model="ir.actions.report">
+        <field name="name">Испратница со Цени</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
@@ -23,6 +87,70 @@
         <field name="print_report_name">'Испратница_со_цени_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
     </record>
+
+    <!-- Data to set domain for outgoing with prices report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_delivery_note_mk_with_prices_outgoing')]"/>
+        <value eval="{'domain': [('picking_type_id.code', '=', 'outgoing')]}"/>
+    </function>
+
+    <!-- Report Action for Приемница со Цени (Incoming with Prices) -->
+    <record id="action_report_delivery_note_mk_with_prices_incoming" model="ir.actions.report">
+        <field name="name">Приемница со Цени</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="print_report_name">'Приемница_со_цени_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for incoming with prices report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_delivery_note_mk_with_prices_incoming')]"/>
+        <value eval="{'domain': [('picking_type_id.code', '=', 'incoming')]}"/>
+    </function>
+
+    <!-- Report Action for Реверс со Цени -->
+    <record id="action_report_reverse_mk_with_prices" model="ir.actions.report">
+        <field name="name">Реверс со Цени</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="print_report_name">'Реверс_со_цени_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for reverse with prices report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_reverse_mk_with_prices')]"/>
+        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Реверс'), ('picking_type_id.name', 'not ilike', 'Враќање')]}"/>
+    </function>
+
+    <!-- Report Action for Повратница со Цени -->
+    <record id="action_report_return_mk_with_prices" model="ir.actions.report">
+        <field name="name">Повратница со Цени</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="print_report_name">'Повратница_со_цени_%s' % (object.name).replace('/', '_')</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
+
+    <!-- Data to set domain for return with prices report -->
+    <function model="ir.actions.report" name="write">
+        <value eval="[ref('action_report_return_mk_with_prices')]"/>
+        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Враќање')]}"/>
+    </function>
 
 </odoo>

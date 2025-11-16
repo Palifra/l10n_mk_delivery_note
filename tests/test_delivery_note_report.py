@@ -51,7 +51,7 @@ class TestDeliveryNoteReport(TransactionCase):
     def test_01_report_action_exists(self):
         """Test that the report action is properly registered"""
         report_action = self.env.ref(
-            'l10n_mk_delivery_note.action_report_delivery_note_mk',
+            'l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing',
             raise_if_not_found=False
         )
 
@@ -93,7 +93,7 @@ class TestDeliveryNoteReport(TransactionCase):
         picking.action_confirm()
 
         # Get the report action
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
 
         # Render the report (this will raise an error if template has issues)
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
@@ -122,7 +122,7 @@ class TestDeliveryNoteReport(TransactionCase):
 
         picking.action_confirm()
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_incoming')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
@@ -164,7 +164,7 @@ class TestDeliveryNoteReport(TransactionCase):
 
         picking.action_confirm()
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
@@ -188,7 +188,7 @@ class TestDeliveryNoteReport(TransactionCase):
 
         picking.action_confirm()
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
@@ -213,7 +213,7 @@ class TestDeliveryNoteReport(TransactionCase):
 
         picking.action_confirm()
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
@@ -221,7 +221,7 @@ class TestDeliveryNoteReport(TransactionCase):
     def test_08_report_binding_to_model(self):
         """Test that report is bound to stock.picking model"""
         report_action = self.env.ref(
-            'l10n_mk_delivery_note.action_report_delivery_note_mk'
+            'l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing'
         )
 
         self.assertEqual(
@@ -238,7 +238,7 @@ class TestDeliveryNoteReport(TransactionCase):
     def test_09_print_report_name(self):
         """Test that print name is correctly formatted"""
         report_action = self.env.ref(
-            'l10n_mk_delivery_note.action_report_delivery_note_mk'
+            'l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing'
         )
 
         # Check that print_report_name contains the pattern
@@ -280,7 +280,7 @@ class TestDeliveryNoteReport(TransactionCase):
         picking1.action_confirm()
         picking2.action_confirm()
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(
             report.id,
             [picking1.id, picking2.id]
@@ -331,7 +331,7 @@ class TestDeliveryNoteReport(TransactionCase):
         )
 
         # Generate report
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
@@ -362,7 +362,7 @@ class TestDeliveryNoteReport(TransactionCase):
         barcode_value = picking.name.replace('/', '')
         self.assertTrue(barcode_value, "Barcode value should not be empty")
 
-        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk')
+        report = self.env.ref('l10n_mk_delivery_note.action_report_delivery_note_mk_outgoing')
         pdf_content, report_type = report._render_qweb_pdf(report.id, picking.ids)
 
         self.assertIsNotNone(pdf_content)
