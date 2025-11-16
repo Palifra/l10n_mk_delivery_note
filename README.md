@@ -61,6 +61,10 @@ EOF
 The report automatically detects:
 - **Outgoing** transfers → printed as "ИСПРАТНИЦА" (Delivery Note)
 - **Incoming** transfers → printed as "ПРИЕМНИЦА" (Receipt Note)
+- **Реверс** operations → printed as "РЕВЕРС" (Equipment Loan)
+- **Враќање на Реверс** operations → printed as "ПОВРАТНИЦА" (Equipment Return)
+
+**Note:** The Print menu shows only the relevant document type based on the picking operation.
 
 ## Screenshots
 
@@ -74,6 +78,7 @@ The generated PDF includes:
 ## Dependencies
 
 - `stock` (Odoo Inventory module)
+- `l10n_mk_reverse` (Equipment Loan Management - for Реверс/Повратница support)
 
 ## Technical Details
 
@@ -134,6 +139,12 @@ Tests cover:
 - Notes rendering
 
 ## Changelog
+
+### Version 18.0.1.1.0
+- Added conditional report menu based on picking type
+- Added support for РЕВЕРС and ПОВРАТНИЦА documents
+- Added l10n_mk_reverse as dependency
+- Improved document type detection
 
 ### Version 18.0.1.0.0
 - Initial release
