@@ -1,176 +1,93 @@
-# Macedonian Delivery Note / Македонска Испратница
+# Macedonia - Stock Reports / Магацински Извештаи
 
-Odoo 18 module for printing Delivery Notes (Испратница/Приемница) in Macedonian format.
+Comprehensive stock picking reports for Macedonian businesses in Odoo 18.
 
-## Features
+## Overview / Преглед
 
-- **Two Report Types:**
-  - **Испратница/Приемница** - Basic delivery note without prices
-  - **Испратница/Приемница со Цени** - Delivery note with cost prices (standard_price)
+This module provides professional PDF reports for various stock operations in Macedonian businesses, including:
 
-- **Document Elements:**
-  - Company information box with VAT number (ЕДБ)
-  - Document title (ИСПРАТНИЦА for outgoing, ПРИЕМНИЦА for incoming)
-  - Document number and date
-  - Code128 barcode for document number
-  - Sender (ИСПРАЌАЧ) and Receiver (ПРИМАТЕЛ) sections
-  - Product table with: line number, product code, name, quantity, unit of measure
-  - Optional: unit cost price and line amount (without VAT)
-  - Notes section
-  - Signature fields: ИЗДАЛ (Issued by), ПРИМИЛ (Received by), Овластено лице (Authorized person)
+- **ИСПРАТНИЦА** - Delivery Note (outgoing transfers)
+- **ПРИЕМНИЦА** - Receipt Note (incoming transfers)
+- **РЕВЕРС** - Equipment Loan Document (equipment lending)
+- **ПОВРАТНИЦА** - Equipment Return Document (equipment returns)
 
-- **Technical Features:**
-  - Uses `web.external_layout` for Bootstrap CSS and standard header/footer
-  - DejaVu Sans font for proper Cyrillic character support
-  - Responsive layout using Bootstrap grid system
-  - Automatic language detection based on partner language
-  - Clean table borders with proper styling
+## Features / Функционалности
 
-## Installation
+### Report Types / Типови на извештаи
 
-1. Copy the `l10n_mk_delivery_note` folder to your Odoo addons directory
-2. Update the module list in Odoo
-3. Install "Македонска Испратница/Приемница" from Apps menu
+1. **Basic Reports** - Without prices (Без цени)
+   - Испратница - for outgoing deliveries
+   - Приемница - for incoming receipts
+   - Реверс - for equipment loans
+   - Повратница - for equipment returns
 
-### Docker Installation
+2. **Reports with Prices** - Including unit costs and totals (Со цени)
+   - Испратница со Цени
+   - Приемница со Цени
+   - Реверс со Цени
+   - Повратница со Цени
 
-```bash
-# Update module list
-docker exec -i odoo_server odoo shell -d YOUR_DATABASE --no-http << 'EOF'
-env['ir.module.module'].update_list()
-env.cr.commit()
-EOF
+### Smart Document Type Detection / Паметна детекција
 
-# Install module
-docker exec -i odoo_server odoo shell -d YOUR_DATABASE --no-http << 'EOF'
-module = env['ir.module.module'].search([('name', '=', 'l10n_mk_delivery_note')])
-module.button_immediate_install()
-env.cr.commit()
-EOF
-```
+The module automatically detects the appropriate document type based on:
+- Picking type code (outgoing/incoming)
+- Picking type name (for Реверс and Повратница)
+- Shows only relevant report options in Print menu
 
-## Usage
+### Professional Macedonian Format / Професионален формат
 
-1. Go to **Inventory > Operations > Transfers**
-2. Open any stock picking (delivery order or receipt)
-3. Click **Print** button
-4. Select either:
-   - **Испратница/Приемница** - for basic delivery note
-   - **Испратница/Приемница со Цени** - for delivery note with cost prices
+- **Header**: Company information (logo, address, tax number/ЕДБ)
+- **Document Info**: Number, date, origin with Code128 barcode
+- **Parties**: Sender (ИСПРАЌАЧ) and Receiver (ПРИМАТЕЛ) sections
+- **Products Table**: Item number, code, name, quantity, unit of measure
+- **Price Columns** (optional): Unit price, total amount without VAT
+- **Signatures**: Three signature areas - ИЗДАЛ / ПРИМИЛ / Овластено лице
+- **Full UTF-8 Support**: Proper Cyrillic character rendering
 
-The report automatically detects:
-- **Outgoing** transfers → printed as "ИСПРАТНИЦА" (Delivery Note)
-- **Incoming** transfers → printed as "ПРИЕМНИЦА" (Receipt Note)
-- **Реверс** operations → printed as "РЕВЕРС" (Equipment Loan)
-- **Враќање на Реверс** operations → printed as "ПОВРАТНИЦА" (Equipment Return)
+## Technical Details / Технички детали
 
-**Note:** The Print menu shows only the relevant document type based on the picking operation.
+### Dependencies / Зависности
 
-## Screenshots
+- `stock` - Odoo Stock/Inventory module
+- `l10n_mk_reverse` - Macedonian equipment loan module (for Реверс operations)
 
-The generated PDF includes:
-- Company logo and information (from external_layout)
-- Document header with barcode
-- Sender and receiver information
-- Product details table
-- Signature areas
-
-## Dependencies
-
-- `stock` (Odoo Inventory module)
-- `l10n_mk_reverse` (Equipment Loan Management - for Реверс/Повратница support)
-
-## Technical Details
-
-- **Models:** stock.picking
-- **Reports:** QWeb PDF templates
-- **Version:** 18.0.1.0.0
-- **License:** LGPL-3
-
-### File Structure
+### Files Structure / Структура на фајлови
 
 ```
-l10n_mk_delivery_note/
+l10n_mk_stock_reports/
 ├── __init__.py
 ├── __manifest__.py
 ├── README.md
-├── reports/
-│   ├── __init__.py
-│   ├── delivery_note_reports.xml      # Report actions
-│   ├── delivery_note_templates.xml    # Basic template (no prices)
-│   └── delivery_note_with_prices_templates.xml  # Template with prices
-└── tests/
-    ├── __init__.py
-    └── test_delivery_note_report.py   # Unit tests
+└── reports/
+    ├── stock_reports.xml           # Report actions and domains
+    ├── stock_report_templates.xml  # QWeb templates (basic)
+    └── stock_report_with_prices_templates.xml  # QWeb templates (with prices)
 ```
 
-## Customization
+### Report Actions / Акции за извештаи
 
-### Changing Fonts
-Edit the `<style>` section in template files to use different fonts:
-```xml
-<style>
-    body {
-        font-family: Your Font, sans-serif !important;
-    }
-</style>
-```
+| Report Name | Domain Filter | Template |
+|------------|---------------|----------|
+| Испратница | `picking_type_id.code = 'outgoing'` | report_stock_picking_mk |
+| Приемница | `picking_type_id.code = 'incoming'` | report_stock_picking_mk |
+| Реверс | `picking_type_id.name ilike 'Реверс'` | report_stock_picking_mk |
+| Повратница | `picking_type_id.name ilike 'Враќање'` | report_stock_picking_mk |
+| Испратница со Цени | `picking_type_id.code = 'outgoing'` | report_stock_picking_mk_with_prices |
+| Приемница со Цени | `picking_type_id.code = 'incoming'` | report_stock_picking_mk_with_prices |
+| Реверс со Цени | `picking_type_id.name ilike 'Реверс'` | report_stock_picking_mk_with_prices |
+| Повратница со Цени | `picking_type_id.name ilike 'Враќање'` | report_stock_picking_mk_with_prices |
 
-### Adjusting Layout
-Modify column widths in the product table by changing the `width` percentages in `<th>` tags.
+## Installation / Инсталација
 
-### Adding Fields
-To add custom fields to the report, edit the template XML files and use QWeb directives like `t-field` or `t-esc`.
+### Prerequisites / Предуслови
 
-## Testing
+1. Install the `l10n_mk_reverse` module first (if using Реверс/Повратница features)
+2. Ensure your Odoo instance supports Macedonian language (mk_MK)
 
-Run the included tests:
+### Install via Docker (Production)
 
 ```bash
-./odoo-bin -d YOUR_DATABASE -u l10n_mk_delivery_note --test-enable --test-tags=/l10n_mk_delivery_note --stop-after-init
-```
-
-Tests cover:
-- Report action registration
-- PDF generation for outgoing/incoming transfers
-- Multiple products
-- Multiple pickings
-- Barcode generation
-- Notes rendering
-
-## Changelog
-
-### Version 18.0.1.1.0
-- Added conditional report menu based on picking type
-- Added support for РЕВЕРС and ПОВРАТНИЦА documents
-- Added l10n_mk_reverse as dependency
-- Improved document type detection
-
-### Version 18.0.1.0.0
-- Initial release
-- Basic delivery note template (ИСПРАТНИЦА/ПРИЕМНИЦА)
-- Delivery note with cost prices
-- Full Macedonian language support
-- Code128 barcode generation
-- Comprehensive test suite
-
-## Support
-
-For issues and feature requests, please create an issue on GitHub.
-
-## Author
-
-**ЕСКОН-ИНЖЕНЕРИНГ ДООЕЛ Струмица**
-
-- Website: https://www.eskon.com.mk
-- Email: info@eskon.com.mk
-- GitHub: https://github.com/Palifra
-
-## Related Modules
-
-- [l10n_mk](https://github.com/Palifra/l10n_mk) - Macedonian Chart of Accounts
-- [l10n_mk_reverse](https://github.com/Palifra/l10n_mk_reverse) - Equipment Loan Management
-
-## License
-
-This module is licensed under LGPL-3.
+# Update module list
+docker exec -i odoo_server odoo shell -d eskon --no-http << 'EOF'
+env['ir.module.module'].update_list()
+env.cr.commit()

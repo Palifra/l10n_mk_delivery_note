@@ -6,8 +6,8 @@
         <field name="name">Испратница</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk</field>
         <field name="print_report_name">'Испратница_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -25,8 +25,8 @@
         <field name="name">Приемница</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk</field>
         <field name="print_report_name">'Приемница_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -44,8 +44,8 @@
         <field name="name">Реверс</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk</field>
         <field name="print_report_name">'Реверс_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -63,8 +63,8 @@
         <field name="name">Повратница</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk</field>
         <field name="print_report_name">'Повратница_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -82,8 +82,8 @@
         <field name="name">Испратница со Цени</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
         <field name="print_report_name">'Испратница_со_цени_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -101,8 +101,8 @@
         <field name="name">Приемница со Цени</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
         <field name="print_report_name">'Приемница_со_цени_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -120,8 +120,8 @@
         <field name="name">Реверс со Цени</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
         <field name="print_report_name">'Реверс_со_цени_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
@@ -139,8 +139,8 @@
         <field name="name">Повратница со Цени</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
-        <field name="report_file">l10n_mk_delivery_note.report_delivery_note_mk_with_prices</field>
+        <field name="report_name">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
+        <field name="report_file">l10n_mk_stock_reports.report_stock_picking_mk_with_prices</field>
         <field name="print_report_name">'Повратница_со_цени_%s' % (object.name).replace('/', '_')</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>

@@ -1,32 +1,42 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Македонска Испратница/Приемница',
-    'version': '18.0.1.1.0',
+    'name': 'Macedonia - Stock Reports / Магацински Извештаи',
+    'version': '18.0.2.0.0',
     'category': 'Inventory/Inventory',
-    'summary': 'QWeb print template за Испратница, Приемница, Реверс и Повратница',
+    'summary': 'Macedonian stock picking reports: Испратница, Приемница, Реверс, Повратница',
     'description': """
-Македонска Испратница/Приемница
-================================
+Macedonia - Stock Reports / Магацински Извештаи
+=================================================
 
-Модул за печатење на Испратница, Приемница, Реверс и Повратница во македонски формат.
+Comprehensive stock picking reports for Macedonian businesses.
 
-Функционалности:
------------------
-* QWeb PDF template за stock.picking
-* Автоматско препознавање на тип документ:
-  - ИСПРАТНИЦА (излезни испораки)
-  - ПРИЕМНИЦА (влезни приеми)
-  - РЕВЕРС (позајмување опрема)
-  - ПОВРАТНИЦА (враќање на опрема)
-* Условени репорти - во Print мени се појавува само релевантниот документ
-* Формат базиран на стандардна македонска испратница
-* Податоци за компанија (лого, адреса, даночен број)
-* Испраќач и Примател секции
-* Табела со производи (со и без цени)
-* Потписи: ИЗДАЛ / ПРИМИЛ / Овластено лице
-* Code128 баркод за број на документ
+Supported Documents / Поддржани документи:
+-------------------------------------------
+* **ИСПРАТНИЦА** - Delivery Note (outgoing transfers)
+* **ПРИЕМНИЦА** - Receipt Note (incoming transfers)
+* **РЕВЕРС** - Equipment Loan Document (equipment lending)
+* **ПОВРАТНИЦА** - Equipment Return Document (equipment returns)
 
-Автор: ЕСКОН-ИНЖЕНЕРИНГ ДООЕЛ Струмица
+Features / Функционалности:
+-----------------------------
+* QWeb PDF templates for stock.picking model
+* Automatic document type detection based on picking type
+* Smart Print menu - shows only relevant document type
+* Professional Macedonian business format
+* Company information (logo, address, tax number)
+* Sender/Receiver sections with full details
+* Product table with quantities and units
+* Optional cost pricing variant
+* Signature areas: ИЗДАЛ / ПРИМИЛ / Овластено лице
+* Code128 barcode generation for document numbers
+* Full UTF-8 support for Cyrillic characters
+
+Report Variants / Варијанти на извештаи:
+------------------------------------------
+1. **Basic Report** - Without prices (Испратница/Приемница)
+2. **With Prices** - Including unit costs and totals (со Цени)
+
+Author: ЕСКОН-ИНЖЕНЕРИНГ ДООЕЛ Струмица
 Website: https://www.eskon.com.mk
     """,
     'author': 'ЕСКОН-ИНЖЕНЕРИНГ ДООЕЛ Струмица',
@@ -37,9 +47,9 @@ Website: https://www.eskon.com.mk
         'l10n_mk_reverse',
     ],
     'data': [
-        'reports/delivery_note_reports.xml',
-        'reports/delivery_note_templates.xml',
-        'reports/delivery_note_with_prices_templates.xml',
+        'reports/stock_reports.xml',
+        'reports/stock_report_templates.xml',
+        'reports/stock_report_with_prices_templates.xml',
     ],
     'demo': [],
     'installable': True,
