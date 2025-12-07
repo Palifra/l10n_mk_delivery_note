@@ -49,7 +49,7 @@ The module automatically detects the appropriate document type based on:
 ### Dependencies / Зависности
 
 - `stock` - Odoo Stock/Inventory module
-- `l10n_mk_reverse` - Macedonian equipment loan module (for Реверс operations)
+- `eskon_reverse` - Equipment borrowing & centralized location management
 
 ### Files Structure / Структура на фајлови
 
@@ -81,7 +81,7 @@ l10n_mk_stock_reports/
 
 ### Prerequisites / Предуслови
 
-1. Install the `l10n_mk_reverse` module first (if using Реверс/Повратница features)
+1. Install the `eskon_reverse` module first (required dependency)
 2. Ensure your Odoo instance supports Macedonian language (mk_MK)
 
 ### Install via Docker (Production)
@@ -91,3 +91,70 @@ l10n_mk_stock_reports/
 docker exec -i odoo_server odoo shell -d eskon --no-http << 'EOF'
 env['ir.module.module'].update_list()
 env.cr.commit()
+
+module = env['ir.module.module'].search([('name', '=', 'l10n_mk_stock_reports')])
+module.button_immediate_install()
+env.cr.commit()
+print("Module installed!")
+EOF
+
+# Restart container
+docker restart odoo_server
+```
+
+### Development Installation
+
+```bash
+./odoo-bin -d your_db -i l10n_mk_stock_reports --stop-after-init
+```
+
+## Usage / Користење
+
+### Printing Reports
+
+1. Open any **Stock Picking** (Inventory → Operations → Transfers)
+2. Click the **Print** button
+3. Select the appropriate report:
+   - **Испратница** - for outgoing deliveries
+   - **Приемница** - for incoming receipts
+   - **Реверс** - for equipment loans
+   - **Повратница** - for equipment returns
+4. Add **со Цени** variant for reports with prices
+
+### Report Selection Logic
+
+The Print menu automatically shows only relevant options:
+- Outgoing pickings → Испратница options
+- Incoming pickings → Приемница options
+- Реверс picking type → Реверс options
+- Враќање picking type → Повратница options
+
+## Related Modules / Поврзани модули
+
+- [eskon_reverse](https://github.com/Palifra/eskon_reverse) - Equipment borrowing & Location Provider
+- [esfsm_stock](https://github.com/Palifra/esfsm_stock) - FSM material tracking
+
+## Changelog / Историја на промени
+
+### 18.0.2.0.0 (2024-12-07)
+- **BREAKING:** Changed dependency from `l10n_mk_reverse` to `eskon_reverse`
+- Updated documentation to reflect new module name
+- No functional changes - only dependency rename
+
+### 18.0.1.0.0
+- Initial release
+- Испратница, Приемница, Реверс, Повратница reports
+- Basic and with-prices variants
+- Smart domain filtering
+
+## Support / Поддршка
+
+- **Email:** info@eskon.com.mk
+- **Website:** https://www.eskon.com.mk
+- **GitHub:** https://github.com/Palifra/l10n_mk_stock_reports
+
+---
+
+**Version:** 18.0.2.0.0
+**Author:** ЕСКОН-ИНЖЕНЕРИНГ ДООЕЛ Струмица
+**License:** LGPL-3

@@ -44,7 +44,7 @@ Website: https://www.eskon.com.mk
     'license': 'LGPL-3',
     'depends': [
         'stock',
-        'l10n_mk_reverse',
+        'eskon_reverse',
     ],
     'data': [
         'reports/stock_reports.xml',
