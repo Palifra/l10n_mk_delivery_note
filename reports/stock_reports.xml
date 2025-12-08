@@ -55,7 +55,7 @@
     <!-- Data to set domain for reverse report -->
     <function model="ir.actions.report" name="write">
         <value eval="[ref('action_report_reverse_mk')]"/>
-        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Реверс'), ('picking_type_id.name', 'not ilike', 'Враќање')]}"/>
+        <value eval="{'domain': [('picking_type_id.name', '=', 'Реверс')]}"/>
     </function>
 
     <!-- Report Action for Повратница -->
@@ -74,7 +74,7 @@
     <!-- Data to set domain for return report -->
     <function model="ir.actions.report" name="write">
         <value eval="[ref('action_report_return_mk')]"/>
-        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Враќање')]}"/>
+        <value eval="{'domain': [('picking_type_id.name', '=', 'Повратница')]}"/>
     </function>
 
     <!-- Report Action for Испратница со Цени (Outgoing with Prices) -->
@@ -131,7 +131,7 @@
     <!-- Data to set domain for reverse with prices report -->
     <function model="ir.actions.report" name="write">
         <value eval="[ref('action_report_reverse_mk_with_prices')]"/>
-        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Реверс'), ('picking_type_id.name', 'not ilike', 'Враќање')]}"/>
+        <value eval="{'domain': [('picking_type_id.name', '=', 'Реверс')]}"/>
     </function>
 
     <!-- Report Action for Повратница со Цени -->
@@ -150,7 +150,7 @@
     <!-- Data to set domain for return with prices report -->
     <function model="ir.actions.report" name="write">
         <value eval="[ref('action_report_return_mk_with_prices')]"/>
-        <value eval="{'domain': [('picking_type_id.name', 'ilike', 'Враќање')]}"/>
+        <value eval="{'domain': [('picking_type_id.name', '=', 'Повратница')]}"/>
     </function>
 
 </odoo>

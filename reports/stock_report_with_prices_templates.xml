@@ -51,8 +51,8 @@
                 <div class="col-4 text-center" style="padding-left: 3cm;">
                     <h4 style="margin: 0 0 5px 0; text-align: left; font-size: 14px;">
                         <strong>
-                            <t t-if="'Реверс' in o.picking_type_id.name and 'Враќање' not in o.picking_type_id.name">РЕВЕРС</t>
-                            <t t-elif="'Враќање' in o.picking_type_id.name">ПОВРАТНИЦА</t>
+                            <t t-if="o.picking_type_id.name == 'Реверс'">РЕВЕРС</t>
+                            <t t-elif="o.picking_type_id.name == 'Повратница'">ПОВРАТНИЦА</t>
                             <t t-elif="o.picking_type_id.code == 'outgoing'">ИСПРАТНИЦА</t>
                             <t t-elif="o.picking_type_id.code == 'incoming'">ПРИЕМНИЦА</t>
                             <t t-else="">ИСПРАТНИЦА/ПРИЕМНИЦА</t>
